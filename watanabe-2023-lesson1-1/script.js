@@ -1,5 +1,13 @@
 const expname = "watanabe-2023-lesson1-1" ; // 実験の名称
 
+// jsPsych 初期化
+var jsPsych = initJsPsych({
+  on_finish: function() {
+//    jsPsych.data.get().localSave('csv', 'data.csv');
+    jsPsych.data.displayData();
+  }
+});
+
 // 保存用のファイル名を生成
 function createfilename(argseed) {
   // 日付時間秒を文字列で返す	
@@ -14,15 +22,9 @@ function createfilename(argseed) {
   const subject_id = jsPsych.randomization.randomID(10);
   answer =  argseed + answer + "-" + subject_id +".csv" ;
   return (answer);
-  }
+  } ;
 var filename = createfilename(expname) ;
 
-var jsPsych = initJsPsych({
-  on_finish: function() {
-//    jsPsych.data.get().localSave('csv', 'data.csv');
-    jsPsych.data.displayData();
-  }
-});
 
 // ------------------------------------------------------------------------
 // 固定の実験パーツ
