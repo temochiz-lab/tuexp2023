@@ -1,3 +1,22 @@
+const expname = "watanabe-2023-lesson1-1" ; // 実験の名称
+
+// 保存用のファイル名を生成
+function createfilename(argseed) {
+  // 日付時間秒を文字列で返す	
+  const dt = new Date();
+  var yyyy = dt.getFullYear();
+  var mm = ('00' + (dt.getMonth()+1)).slice(-2);
+  var dd = ('00' + dt.getDate()).slice(-2);
+  var hh = ('00' + dt.getHours()).slice(-2);
+  var mi = ('00' + dt.getMinutes()).slice(-2);
+  var se = ('00' + dt.getSeconds()).slice(-2);
+  var answer = yyyy + mm + dd + "-" + hh + mm + se ;
+  const subject_id = jsPsych.randomization.randomID(10);
+  answer =  argseed + answer + "-" + subject_id +".csv" ;
+  return (answer);
+  }
+var filename = createfilename(expname) ;
+
 var jsPsych = initJsPsych({
   on_finish: function() {
 //    jsPsych.data.get().localSave('csv', 'data.csv');
@@ -5,14 +24,13 @@ var jsPsych = initJsPsych({
   }
 });
 
-
 // ------------------------------------------------------------------------
 // 固定の実験パーツ
 // ------------------------------------------------------------------------
 
 var enter_fullscreen = {
   type: jsPsychFullscreen,
-  message: '<p>実験名: 2022-1-セッション1</p><p>開始ボタンを押すと全画面表示で実験が始まります。</p>',
+  message: '<p>実験名: 2023-1-セッション1</p><p>開始ボタンを押すと全画面表示で実験が始まります。</p>',
   button_label: "開始",
   fullscreen_mode: true
 }
