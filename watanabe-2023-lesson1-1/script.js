@@ -1,14 +1,21 @@
-const expname = "watanabe-2023-lesson1-1" ; // 実験の名称
+
+
+// ------------------------------------------------------------------------
+// 共通の実験パーツ
+// ------------------------------------------------------------------------
+
+// 実験固有で設定するのは2個所
+const expname = "watanabe-2023-lesson1-1" ; // 【要設定変更1/2】 実験名
 
 // jsPsych 初期化
 var jsPsych = initJsPsych({
   on_finish: function() {
-//    jsPsych.data.get().localSave('csv', 'data.csv');
-    jsPsych.data.displayData();
+//    jsPsych.data.get().localSave('csv', 'data.csv'); // ローカルで保存する時に使用
+//    jsPsych.data.displayData();                      // 結果を表示する時に使用
   }
 });
 
-// 保存用のファイル名を生成
+// クラウド(DataPipe)保存用のファイル名を生成
 function createfilename(argseed) {
   // 日付時間秒を文字列で返す	
   const dt = new Date();
@@ -24,6 +31,15 @@ function createfilename(argseed) {
   return (answer);
   } ;
 var filename = createfilename(expname) ;
+
+// DataPipe保存設定
+const save_data = {
+  type: jsPsychPipe,
+  action: "save",
+  experiment_id: "RIFUr6lCBTOf", // // 【要設定変更2/2】 DataPipeで表示されるID
+  filename: filename,
+  data_string: ()=>jsPsych.data.get().csv()
+};
 
 
 // ------------------------------------------------------------------------
@@ -141,4 +157,4 @@ trials.timeline.push(blankscreen) ;
 // 実験の開始
 // ------------------------------------------------------------------------
 
-jsPsych.run([enter_fullscreen,par_id,hello,trials,bye,exit_fullscreen]);
+jsPsych.run([enter_fullscreen,par_id,hello,trials, bye, save_data, exit_fullscreen]);
