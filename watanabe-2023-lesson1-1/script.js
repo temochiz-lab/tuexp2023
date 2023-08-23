@@ -27,7 +27,7 @@ function createfilename(argseed) {
   var se = ('00' + dt.getSeconds()).slice(-2);
   var answer = yyyy + mm + dd + "-" + hh + mm + se ;
   const subject_id = jsPsych.randomization.randomID(10);
-  answer =  argseed + answer + "-" + subject_id +".csv" ;
+  answer =  argseed + "-" + answer + "-" + subject_id +".csv" ;
   return (answer);
   } ;
 var filename = createfilename(expname) ;
