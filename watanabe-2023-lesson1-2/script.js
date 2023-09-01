@@ -75,6 +75,16 @@ var bye2nd = {
 // ------------------------------------------------------------------------
 // 練習用問題の作成
 // ------------------------------------------------------------------------
+// 最初の説明と被検者情報の入力
+var par_id = {
+  type: jsPsychSurveyText,
+  questions: [
+    {prompt: '<strong>これから実験を始めます。</strong><br><br><br>学籍番号を入力してください', columns: 10, required: true, name: 'id'},
+    {prompt: 'あなたの性別を男性であれば 1、女性であれば 2、答えたくない場合は 3 を入力してください。', columns: 10, required: true, name: 'sex'},
+    {prompt: 'あなたの年齢を入力してください。', columns: 10, required: true, name: 'age'},
+  ],
+  button_label: '次へ',
+};
 
 // 実験の説明
 var pre_hello2nd = {
@@ -217,4 +227,4 @@ trials.timeline.push(blankscreen) ;
 // 実験の開始
 // ------------------------------------------------------------------------
 
-jsPsych.run([enter_fullscreen,  pre_hello2nd,pre_trials, hello2nd,trials,bye2nd, save_data, exit_fullscreen]);
+jsPsych.run([enter_fullscreen,par_id,pre_hello2nd,pre_trials, hello2nd,trials,bye2nd, save_data, exit_fullscreen]);
