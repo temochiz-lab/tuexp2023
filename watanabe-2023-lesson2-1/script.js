@@ -225,4 +225,4 @@ trials.timeline.push(blankscreen) ;
 // 実験の開始
 // ------------------------------------------------------------------------
 
-jsPsych.run([enter_fullscreen,par_id,pre_hello,pre_trials,pre_bye,hello,trials,save_data,bye,exit_fullscreen]);
+jsPsych.run([enter_fullscreen,par_id,pre_hello,pre_trials,pre_bye,hello,trials,bye,save_data,exit_fullscreen]);
