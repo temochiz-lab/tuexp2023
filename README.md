@@ -12,5 +12,7 @@ https://temochiz-lab.github.io/tuexp2023/watanabe-2023-lesson2-1/
 
 音声が何秒だったかスライダーで選択する  
 https://temochiz-lab.github.io/tuexp2023/watanabe-2023-lesson2-2/  
-
+  
+  
+入力値をOSFのファイル名にするサンプルコード  
 https://temochiz-lab.github.io/jsPsychSampleCode/入力値をクラウドのファイル名に.html
