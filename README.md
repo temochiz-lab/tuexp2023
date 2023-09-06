@@ -1,5 +1,5 @@
 # tuexp2023
-tuexp2023  
+2023年度授業用
 
 単語を一定時間表示する  
 https://temochiz-lab.github.io/tuexp2023/watanabe-2023-lesson1-1/  
