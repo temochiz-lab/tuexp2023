@@ -16,3 +16,7 @@ https://temochiz-lab.github.io/tuexp2023/watanabe-2023-lesson2-2/
   
 入力値をOSFのファイル名にするサンプルコード  
 https://temochiz-lab.github.io/jsPsychSampleCode/入力値をクラウドのファイル名に.html
+
+
+OSF  
+https://osf.io/dashboard
