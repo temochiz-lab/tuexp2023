@@ -6,7 +6,7 @@
 
 var jsPsych = initJsPsych({
   on_finish: function() {
-    jsPsych.data.get().localSave('csv', 'data.csv');
+//    jsPsych.data.get().localSave('csv', 'data.csv');
 //    jsPsych.data.displayData();
   }
 });

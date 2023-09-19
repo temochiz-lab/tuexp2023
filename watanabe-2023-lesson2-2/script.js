@@ -6,7 +6,7 @@
 
 var jsPsych = initJsPsych({
   on_finish: function() {
-    jsPsych.data.get().localSave('csv', 'data.csv');
+//    jsPsych.data.get().localSave('csv', 'data.csv');
 //    jsPsych.data.displayData();
   }
 });
@@ -101,7 +101,7 @@ var bye = {
 // 説明
 var pre_hello = {
   type: jsPsychHtmlKeyboardResponse,
-    stimulus: '実験の練習を始めます。 1500 msec の凝視点の後に表示される指定秒数が経過したらスペースキーを押してください。<br><br>スペースキーを押すと始まります。',
+    stimulus: '実験の練習を始めます。 何秒間音声が流れていたか選択してください。<br><br>スペースキーを押すと始まります。',
     choices: ' ',
 };
 
