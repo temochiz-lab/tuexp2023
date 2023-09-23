@@ -2,8 +2,12 @@
 // 共通の実験パーツ
 // ------------------------------------------------------------------------
 
-// 実験固有で設定するのは2個所
-const expname = "watanabe-2023-lesson1-2" ; // 【要設定変更1/2】 実験名
+// 実験固有で設定するのはこの2個所
+const expname = "watanabe-2023-lesson2-2";  // 【要設定変更1/2】 
+const osf_experiment_id = "RIFUr6lCBTOf";   // 【要設定変更2/2】 DataPipeで表示されるID
+
+var filename ; // OSFのファイル名
+var inputVal ; // 入力ボックスの要素を取得
 
 var jsPsych = initJsPsych({
 //  on_finish: function() {
@@ -24,19 +28,23 @@ function createfilename(argseed) {
   var se = ('00' + dt.getSeconds()).slice(-2);
   var answer = yyyy + mm + dd + "-" + hh + mm + se ;
   const subject_id = jsPsych.randomization.randomID(10);
-  answer =  argseed + "-" + answer + "-" + subject_id +".csv" ;
+  answer =  argseed + answer + "-" + subject_id +".csv" ;
   return (answer);
   } ;
 var filename = createfilename(expname) ;
 
-// DataPipe保存設定
-const save_data = {
-  type: jsPsychPipe,
-  action: "save",
-  experiment_id: "RIFUr6lCBTOf", // // 【要設定変更2/2】 DataPipeで表示されるID
-  filename: filename,
-  data_string: ()=>jsPsych.data.get().csv()
-};
+// htmlからボタンを押された時の呼び出し
+// 入力値をOSFのファイル名にするために一旦入力からのファイル名生成、実験本体に進む
+function pushNext() {
+    // myInputが空でないか確認する
+    inputVal = document.getElementById("myInput").value;
+    if (inputVal) {
+        // ファイル名を生成する
+        filename = createfilename(expname + '-ID.' + inputVal+ '-') ;
+        startExperiment() ;
+    }
+}
+
 
 var enter_fullscreen = {
   type: jsPsychFullscreen,
@@ -75,11 +83,22 @@ var bye2nd = {
 // ------------------------------------------------------------------------
 // 練習用問題の作成
 // ------------------------------------------------------------------------
+// 実験本体
+function startExperiment() {
+
+// DataPipe保存設定
+const save_data = {
+  type: jsPsychPipe,
+  action: "save",
+  experiment_id: "RIFUr6lCBTOf", // // 【要設定変更2/2】 DataPipeで表示されるID
+  filename: filename,
+  data_string: ()=>jsPsych.data.get().csv()
+};
+
 // 最初の説明と被検者情報の入力
 var par_id = {
   type: jsPsychSurveyText,
   questions: [
-    {prompt: '<strong>これから実験を始めます。</strong><br><br><br>学籍番号を入力してください', columns: 10, required: true, name: 'id'},
     {prompt: 'あなたの性別を男性であれば 1、女性であれば 2、答えたくない場合は 3 を入力してください。', columns: 10, required: true, name: 'sex'},
     {prompt: 'あなたの年齢を入力してください。', columns: 10, required: true, name: 'age'},
   ],
@@ -191,6 +210,8 @@ var examSession2 = [
   { label: '労働市場'           , group:'k' },
 ];
 
+// examSession2.splice(3) ; // テスト用に配列サイズを詰める test
+
 // 順番をランダマイズしたいので指定しておく
 var trials = {
   timeline: [],
@@ -228,3 +249,6 @@ trials.timeline.push(blankscreen) ;
 // ------------------------------------------------------------------------
 
 jsPsych.run([enter_fullscreen,par_id,pre_hello2nd,pre_trials, hello2nd,trials,bye2nd, save_data, exit_fullscreen]);
+
+// 実験本体の終了
+}
