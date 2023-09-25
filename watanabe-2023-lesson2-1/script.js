@@ -127,7 +127,7 @@ var eyepointVoice = {
 // 説明
 var pre_hello = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: '実験の練習を始めます。 1500 msec の凝視点の後に表示される指定秒数が経過したらスペースキーを押してください。<br><br>スペースキーを押すと始まります。',
+  stimulus: '実験の練習を始めます。 1500 msec の凝視点の後に秒数が表示されます。表示された秒数が経過したらスペースキーを押してください。<br><br>スペースキーを押すと始まります。',
   choices: ' ',
 };
 
@@ -171,7 +171,7 @@ pre_trials.timeline.push(blankscreen) ;
 // 説明
 var hello = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: '実験を始めます。 1500 msec の凝視点の後に表示される指定秒数が経過したらスペースキーを押してください。<br><br>スペースキーを押すと始まります。',
+  stimulus: '実験を始めます。 1500 msec の凝視点の後に秒数が表示されます。表示された秒数が経過したらスペースキーを押してください。<br><br>スペースキーを押すと始まります。',
   choices: ' ',
 };
 
