@@ -128,6 +128,10 @@ var pre_bye = {
     choices: ' ',
 };
 
+const pre_answertext = [
+  "1.5秒", "7秒", "10秒",
+];
+
 var pre_likert = {
   type: jsPsychSurveyLikert,
   scale_width: 800,
@@ -141,7 +145,10 @@ var pre_likert = {
         "10<br>秒",
       ]
     }
-  ]
+  ],
+  on_finish: function (data) {
+     data.label  = pre_answertext[data.response.Q0] ;
+  },
 };
 
 var baseURL = './voice/' ;
@@ -188,6 +195,13 @@ var hello = {
   choices: ' ',
 };
 
+const answertext = [
+  "0秒", "0.5秒", "1秒", "2秒", "3秒",
+  "4秒", "5秒", "6秒", "7秒", "8秒",
+  "9秒", "10秒", "11秒", "12秒", "13秒",
+  "14秒", "15秒", "16秒", "17秒", "18秒",
+  "19秒", "20秒",
+];
 
 var likert = {
   type: jsPsychSurveyLikert,
@@ -221,7 +235,10 @@ var likert = {
         "20<br>秒",
       ]
     }
-  ]
+  ],
+  on_finish: function (data) {
+     data.label  = answertext[data.response.Q0] ;
+  },
 };
 
 // ------------------------------------------------------------------------
