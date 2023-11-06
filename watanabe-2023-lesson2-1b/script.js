@@ -98,6 +98,14 @@ var eyepoint = {
   trial_duration: 1500,
 };
 
+// キー入力を待つ凝視点
+var eyepointKeyboardResponse = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: '<p style="font-size: 48px;">+</p>',
+  choices: " ",
+};
+
+
 var blankscreen = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: '',
@@ -135,7 +143,7 @@ var waitKeypress = {
 // 説明
 var pre_hello = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: '実験の練習を始めます。 カウントしていただく秒数の文字表示の後に＋の凝視点が表示されます。凝視点が消えた後，文字表示の秒数が経過したと思ったら，スペースキーを押してください。<br><br>スペースキーを押すと始まります。',
+  stimulus: '実験の練習を始めます。 <br><br>カウントしていただく秒数の文字表示の後に＋の凝視点が表示されます。<br>＋が表示されたら，すぐに文字表示の秒数をカウントしてください。<br>カウントが終了したら，スペースキーを押してください。スペースキーをおしたら，＋が消えます。<br><br>スペースキーを押すと始まります。',
   choices: ' ',
 };
 
@@ -169,9 +177,7 @@ var pre_exam = {
 // pre_trials.timeline.push(eyepointVoice) ; // 凝視点の直前に時報的な音を入れる
 pre_trials.timeline.push(blankscreen) ;
 pre_trials.timeline.push(pre_exam) ;
-pre_trials.timeline.push(eyepoint) ;         // 凝視点の直前に時報的な音を入れない
-pre_trials.timeline.push(waitKeypress) ;     // キー待ちで時間計測
-
+pre_trials.timeline.push(eyepointKeyboardResponse) ; 
 
 // ------------------------------------------------------------------------
 // 本番用問題の作成
@@ -180,7 +186,7 @@ pre_trials.timeline.push(waitKeypress) ;     // キー待ちで時間計測
 // 説明
 var hello = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: '実験を始めます。 カウントしていただく秒数の文字表示の後に＋の凝視点が表示されます。凝視点が消えた後，文字表示の秒数が経過したと思ったら，スペースキーを押してください。<br><br>スペースキーを押すと始まります。',
+  stimulus: '実験を始めます。<br><br> カウントしていただく秒数が文字で表示された後に「＋」の凝視点が表示されるので、秒数をカウントしてください。<br>カウントが終了したらスペースキーを押してください。　「＋」が消えて次の問題に進みます。<br><br>スペースキーを押すと始まります。',
   choices: ' ',
 };
 
@@ -248,8 +254,7 @@ var exam = {
 // trials.timeline.push(eyepointVoice) ; // 時報的な音を出す 
 trials.timeline.push(blankscreen) ;
 trials.timeline.push(exam) ;
-trials.timeline.push(eyepoint) ;         // 出さない
-trials.timeline.push(waitKeypress) ;     // キー待ちで時間計測
+trials.timeline.push(eyepointKeyboardResponse) ;
 
 // ------------------------------------------------------------------------
 // 実験の開始
