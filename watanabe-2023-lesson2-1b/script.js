@@ -68,7 +68,7 @@ const save_data = {
 
 var enter_fullscreen = {
   type: jsPsychFullscreen,
-  message: '<p>実験名: 2022-2-1 </p><p>開始ボタンを押すと全画面表示で実験が始まります。</p> <font size=1 color=silver>sound ©OtoLogic</font><br>',
+  message: '<p>実験名: 2022-2-1B </p><p>開始ボタンを押すと全画面表示で実験が始まります。</p> <font size=1 color=silver>sound ©OtoLogic</font><br>',
   button_label: "開始",
   fullscreen_mode: true
 }
@@ -120,6 +120,14 @@ var eyepointVoice = {
   trial_duration: 4000,
 };
 
+// キー入力待ち
+var waitKeypress = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: "",
+  choices: ' ',
+};
+
+
 // ------------------------------------------------------------------------
 // 練習用問題の作成
 // ------------------------------------------------------------------------
@@ -127,7 +135,7 @@ var eyepointVoice = {
 // 説明
 var pre_hello = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: '実験の練習を始めます。 1500 msec の凝視点の後に秒数が表示されます。表示された秒数が経過したらスペースキーを押してください。<br><br>スペースキーを押すと始まります。',
+  stimulus: '実験の練習を始めます。 カウントしていただく秒数の文字表示の後に＋の凝視点が表示されます。凝視点が消えた後，文字表示の秒数が経過したと思ったら，スペースキーを押してください。<br><br>スペースキーを押すと始まります。',
   choices: ' ',
 };
 
@@ -136,7 +144,6 @@ var pre_bye = {
   stimulus: '実験の練習が終わりました。 <br><br>スペースキーを押すと次に進みます。',
   choices: ' ',
 };
-
 
 var pre_examSec = [
   { label: '1.5秒' },
@@ -155,13 +162,15 @@ var pre_trials = {
 var pre_exam = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {return  "<font size=48px>" + jsPsych.timelineVariable('label') + "</font>"; },
-    choices: ' ',
+    choices: 'NO_KEYS',
+    trial_duration: 2000,
 };
 
 // pre_trials.timeline.push(eyepointVoice) ; // 凝視点の直前に時報的な音を入れる
-pre_trials.timeline.push(eyepoint) ;         // 凝視点の直前に時報的な音を入れない
-pre_trials.timeline.push(pre_exam) ;
 pre_trials.timeline.push(blankscreen) ;
+pre_trials.timeline.push(pre_exam) ;
+pre_trials.timeline.push(eyepoint) ;         // 凝視点の直前に時報的な音を入れない
+pre_trials.timeline.push(waitKeypress) ;     // キー待ちで時間計測
 
 
 // ------------------------------------------------------------------------
@@ -171,7 +180,7 @@ pre_trials.timeline.push(blankscreen) ;
 // 説明
 var hello = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: '実験を始めます。 1500 msec の凝視点の後に秒数が表示されます。表示された秒数が経過したらスペースキーを押してください。<br><br>スペースキーを押すと始まります。',
+  stimulus: '実験を始めます。 カウントしていただく秒数の文字表示の後に＋の凝視点が表示されます。凝視点が消えた後，文字表示の秒数が経過したと思ったら，スペースキーを押してください。<br><br>スペースキーを押すと始まります。',
   choices: ' ',
 };
 
@@ -232,13 +241,15 @@ var trials = {
 var exam = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {return  "<font size=48px>" + jsPsych.timelineVariable('label') + "</font>"; },
-    choices: ' ',
+    choices: 'NO_KEYS',
+    trial_duration: 2000,
 };
 
 // trials.timeline.push(eyepointVoice) ; // 時報的な音を出す 
-trials.timeline.push(eyepoint) ;         // 出さない
-trials.timeline.push(exam) ;
 trials.timeline.push(blankscreen) ;
+trials.timeline.push(exam) ;
+trials.timeline.push(eyepoint) ;         // 出さない
+trials.timeline.push(waitKeypress) ;     // キー待ちで時間計測
 
 // ------------------------------------------------------------------------
 // 実験の開始
