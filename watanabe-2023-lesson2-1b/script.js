@@ -83,7 +83,6 @@ var par_id = {
   button_label: '次へ',
 };
 
-
 var exit_fullscreen = {
   type: jsPsychFullscreen,
   fullscreen_mode: false,
@@ -104,7 +103,6 @@ var eyepointKeyboardResponse = {
   stimulus: '<p style="font-size: 48px;">+</p>',
   choices: " ",
 };
-
 
 var blankscreen = {
   type: jsPsychHtmlKeyboardResponse,
@@ -143,7 +141,7 @@ var waitKeypress = {
 // 説明
 var pre_hello = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus: '実験の練習を始めます。 <br><br>カウントしていただく秒数の文字表示の後に＋の凝視点が表示されます。<br>＋が表示されたら，すぐに文字表示の秒数をカウントしてください。<br>カウントが終了したら，スペースキーを押してください。スペースキーをおしたら，＋が消えます。<br><br>スペースキーを押すと始まります。',
+  stimulus: '実験の練習を始めます。 <br><br> カウントしていただく秒数が文字で表示された後に「＋」の凝視点が表示されるので、秒数をカウントしてください。<br>カウントが終了したらスペースキーを押してください。　「＋」が消えて次の問題に進みます。<br><br>スペースキーを押すと始まります。',
   choices: ' ',
 };
 
@@ -171,7 +169,7 @@ var pre_exam = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {return  "<font size=48px>" + jsPsych.timelineVariable('label') + "</font>"; },
     choices: 'NO_KEYS',
-    trial_duration: 2000,
+    trial_duration: 3000,
 };
 
 // pre_trials.timeline.push(eyepointVoice) ; // 凝視点の直前に時報的な音を入れる
@@ -248,7 +246,7 @@ var exam = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {return  "<font size=48px>" + jsPsych.timelineVariable('label') + "</font>"; },
     choices: 'NO_KEYS',
-    trial_duration: 2000,
+    trial_duration: 3000,
 };
 
 // trials.timeline.push(eyepointVoice) ; // 時報的な音を出す 
