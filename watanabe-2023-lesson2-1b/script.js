@@ -169,7 +169,7 @@ var pre_exam = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {return  "<font size=48px>" + jsPsych.timelineVariable('label') + "</font>"; },
     choices: 'NO_KEYS',
-    trial_duration: 3000,
+    trial_duration: 2500,
 };
 
 // pre_trials.timeline.push(eyepointVoice) ; // 凝視点の直前に時報的な音を入れる
@@ -246,7 +246,7 @@ var exam = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {return  "<font size=48px>" + jsPsych.timelineVariable('label') + "</font>"; },
     choices: 'NO_KEYS',
-    trial_duration: 3000,
+    trial_duration: 2500,
 };
 
 // trials.timeline.push(eyepointVoice) ; // 時報的な音を出す 
