@@ -12,10 +12,27 @@
       <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
       <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
       <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
+      <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
       
       <!-- jspsych 実験用プログラムの読み込み -->
       <script src="./script.js"></script>
+      <!-- css -->
+        <style>
+        .container {
+          display: grid;
+          place-items: center;
+          height: 70vh;
+        }
+      </style>
   </head>
   <body>
+    <div class="container">
+      <center>
+      <b>これから大学生における魚の認知度についての実験を始めます。</b><br><br>
+      学籍番号を入力してください。<br><br>
+      <input type="text" id="myInput" required><br><br><br>
+      <input type="submit" value="ボタンを押すと実験が始まります。" onclick="pushNext();">
+      </center>
+      </div>
   </body>
 </html>

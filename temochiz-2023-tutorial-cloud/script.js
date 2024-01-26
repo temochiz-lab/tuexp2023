@@ -1,18 +1,12 @@
-// 保存用のファイル名を生成
-function yyyymmddhhmise() {
-  // 日付時間秒を文字列で返す	
-    const dt = new Date();
-    var yyyy = dt.getFullYear();
-    var mm = ('00' + (dt.getMonth()+1)).slice(-2);
-    var dd = ('00' + dt.getDate()).slice(-2);
-    var hh = ('00' + dt.getHours()).slice(-2);
-    var mi = ('00' + dt.getMinutes()).slice(-2);
-    var se = ('00' + dt.getSeconds()).slice(-2);
-  
-    var answer = yyyy + mm + dd + "-" + hh + mm + se ;
-    return (answer);
-  }
-var filename = "temochiz-" + yyyymmddhhmise() + ".csv" ;
+// ------------------------------------------------------------------------
+// 共通の実験パーツ
+// ------------------------------------------------------------------------
+// 実験固有で設定するのはこの2個所
+const expname = "temochizpractice";        // 【要設定変更1/2】 
+const datapipe_experiment_id = "2LnDwFYoR6So";  // 【要設定変更2/2】 DataPipeで表示されるID
+
+var filename ; // OSFのファイル名
+var inputVal ; // 入力ボックスの要素を取得
 
 var jsPsych = initJsPsych({
   on_finish: function() {
@@ -21,15 +15,49 @@ var jsPsych = initJsPsych({
   }
 });
 
-// ------------------------------------------------------------------------
-// 固定の実験パーツ
-// ------------------------------------------------------------------------
+// クラウド(DataPipe)保存用のファイル名を生成
+function createfilename(argseed) {
+  // 日付時間秒を文字列で返す
+  const dt = new Date();
+  var yyyy = dt.getFullYear();
+  var mm = ('00' + (dt.getMonth()+1)).slice(-2);
+  var dd = ('00' + dt.getDate()).slice(-2);
+  var hh = ('00' + dt.getHours()).slice(-2);
+  var mi = ('00' + dt.getMinutes()).slice(-2);
+  var se = ('00' + dt.getSeconds()).slice(-2);
+  var answer = yyyy + mm + dd + "-" + hh + mm + se ;
+  const subject_id = jsPsych.randomization.randomID(10);
+  answer =  argseed + answer + "-" + subject_id +".csv" ;
+  return (answer);
+  } ;
+var filename = createfilename(expname) ;
+
+// htmlからボタンを押された時の呼び出し
+function pushNext() {
+  // myInputが空でないか確認する
+  inputVal = document.getElementById("myInput").value;
+  if (inputVal) {
+      // ファイル名を生成する
+      filename = createfilename(expname + '-ID.' + inputVal+ '-') ;
+      startExperiment() ;
+  }
+}
+
+function startExperiment() {
+
+// DataPipe保存設定
+const save_data = {
+  type: jsPsychPipe,
+  action: "save",
+  experiment_id: datapipe_experiment_id, 
+  filename: filename,
+  data_string: ()=>jsPsych.data.get().csv()
+};
 
 // 最初の説明と被検者情報の入力
 var par_id = {
   type: jsPsychSurveyText,
   questions: [
-    {prompt: '<strong>これから大学生における魚の認知度についての実験を始めます。</strong><br><br><br>学籍番号を入力してください', columns: 10, required: true, name: 'id'},
     {prompt: 'あなたの性別を男性であれば 1、女性であれば 2、答えたくない場合は 3 を入力してください。', columns: 5, required: true, name: 'sex'},
     {prompt: 'あなたの年齢を入力してください。', columns: 5, required: true, name: 'age'},
   ],
@@ -133,5 +161,6 @@ trials.timeline.push(exam) ;
 // 実験の開始
 // ------------------------------------------------------------------------
 
-//jsPsych.run([preload,enter_fullscreen,par_id,hello,trials,bye,exit_fullscreen]);
-jsPsych.run([preload,par_id,hello,trials,bye]);
+jsPsych.run([preload,enter_fullscreen,par_id,hello,trials,bye,save_data,exit_fullscreen]);
+
+}
